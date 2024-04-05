@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+      <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Zooming</title>
+            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <style>
+                  section {
+                        height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                  }
+
+                  .scroll-watcher {
+                        position: fixed;
+                        background-color: rgb(242, 209, 149);
+                        scale: 0 1;
+                        animation: scroll-watcher linear;
+                        animation-timeline: scroll();
+                        z-index: 50;
+                        transform-origin: left;
+                        border-radius: 5px;
+                        height: 5px;
+                        width: 100%;
+                  }
+
+                  @keyframes scroll-watcher {
+                        to {
+                              scale: 1 1;
+                        }
+                  }
+
+
+                  .boxes {
+                        display: flex;
+                        gap: 10px;
+                  }
+
+                  .box {
+                        height: 100px;
+                        width: 100px;
+                        background-color: brown;
+                  }
+
+            </style>
+      </head>
+
+      <script src="https://cdn.tailwindcss.com"></script>
+
+      <body>
+            <div class="scroll-watcher">
+            </div>
+            <div class="z-10 sticky top-0 bg-white">
+                  <header class="z-4">
+                        <div class="border-b-2 border-solid">
+                              <div class="container m-auto">
+                                    <div class="relative justify-between align-center flex">
+                                          <div class=" 1200:absolute top-24 left-0 right-0 z-1 pointer-events-none">
+                                                <div class="svg-top transition-all ease-out duration-300"
+                                                      style="transform: none">
+                                                      <a class="pointer-events-auto" title="Home" href="/">
+                                                            <svg width="100%" height="100%" viewBox="0 0 322 121"
+                                                                  version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                  xml:space="preserve"
+                                                                  xmlns:serif="http://www.serif.com/"
+                                                                  style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                                                                  <g transform="matrix(1,0,0,1,-153,-89)">
+                                                                        <text x="146.983px" y="200.257px"
+                                                                              style="font-family:'ArialMT', 'Arial', sans-serif;font-size:144px;">Hello</text>
+                                                                  </g>
+                                                            </svg>
+                                                      </a>
+                                                </div>
+                                          </div>
+                                          <div class="relative flex justify-end z-0 !z-2 items-center">
+                                                <nav>
+                                                      <ul class="flex gap-3">
+                                                            <li>Home</li>
+                                                            <li>Services</li>
+                                                            <li>Contact</li>
+                                                      </ul>
+                                                </nav>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </header>
+            </div>
+            <section>
+                  <div>
+                        <h1>Hero</h1>
+                        <div class="image-container">
+                              <img class="hero-img"
+                                    src="https://preview.redd.it/i-got-bored-so-i-decided-to-draw-a-random-image-on-the-v0-4ig97vv85vjb1.png?width=640&crop=smart&auto=webp&s=22ed6cc79cba3013b84967f32726d087e539b699"
+                                    alt="pumpkin cat" />
+                        </div>
+                  </div>
+            </section>
+            <section>
+                  <div>
+                        <h1 class="text-center text-xl font-bold pb-8">Header</h1>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic fugit ratione expedita
+                              placeat
+                              explicabo quas ullam culpa tenetur rerum omnis, voluptatum sit, fuga ad! Blanditiis
+                              officiis
+                              iure at! Ab, ratione.</p>
+                  </div>
+            </section>
+            <script>
+                  var svgTop = document.querySelector(".svg-top");
+                  var heroImg = document.querySelector(".hero-img");
+                  var heroImgContainer = document.querySelector('.image-container');
+                  var body = document.querySelector("body");
+
+                  window.addEventListener("scroll", () => {
+                        // Check if page is scrolled (you might want to check for a specific scroll position)
+                        if (window.scrollY > 0) {
+                              svgTop.style.transform = "scale(0.2)";
+                        } else {
+                              svgTop.style.transform = "scale(1)"; // Reset scale if needed
+                        }
+                  });
+                  document.addEventListener("DOMContentLoaded", (event) => {
+                        gsap.registerPlugin(ScrollTrigger)
+                        gsap.to(heroImgContainer, {
+                              scrollTrigger: {
+                                    trigger: heroImgContainer,
+                                    // play | pause | resume | reverse | restart | reset | complete | none
+                                    toggleActions: "restart none none none",
+                                    // top | center | bottom | specific pixels or perecent
+                                    start: "center 30%",
+                                    end: "bottom 10%",
+                                    // Set a marker to see where is the layout
+                                    markers: false,
+                                    scrub: true,
+                              },
+                              scale: 0,
+                              transformOrigin: "top left",
+                              duration: 3
+                        })
+
+                  });
+
+            </script>
+      </body>
+
+</html>
